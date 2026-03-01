@@ -107,7 +107,7 @@
             margin-top: 0.5rem;
         }
 
-        /* Photo styling - FIXED */
+        /* Photo styling */
         .photo-frame {
             width: 260px;
             height: 260px;
@@ -146,7 +146,7 @@
             background: #e27b9c;
         }
 
-        /* Secret pages - FIXED */
+        /* Secret pages - NO BLUR, completely normal */
         .password-box {
             display: flex;
             flex-direction: column;
@@ -154,10 +154,9 @@
             gap: 12px;
             margin: 20px 0 10px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.7);
             padding: 25px 20px;
             border-radius: 30px;
-            backdrop-filter: blur(4px);
             border: 1px solid rgba(232, 141, 170, 0.3);
         }
 
@@ -217,6 +216,8 @@
 
         .mt-2 { margin-top: 1rem; }
         .mb-1 { margin-bottom: 0.5rem; }
+        
+        /* NO BLUR CLASSES - completely removed */
     </style>
 </head>
 <body>
@@ -250,7 +251,7 @@
             </div>
         </section>
 
-        <!-- FIRST PHOTO - FIXED with img tag -->
+        <!-- FIRST PHOTO -->
         <section class="fade-section">
             <div class="content">
                 <h3 class="section-sub">📸 Photo space</h3>
@@ -280,7 +281,7 @@
             </div>
         </section>
 
-        <!-- MEMORY PHOTO - FIXED with img tag -->
+        <!-- MEMORY PHOTO -->
         <section class="fade-section">
             <div class="content">
                 <h3 class="section-sub">📸 Photo space</h3>
@@ -301,7 +302,7 @@
             </div>
         </section>
 
-        <!-- US PHOTO - FIXED with img tag -->
+        <!-- US PHOTO -->
         <section class="fade-section">
             <div class="content">
                 <h3 class="section-sub">📸 Photo space</h3>
@@ -330,13 +331,13 @@
             </div>
         </section>
 
-        <!-- SECRET PAGE 1 - FIXED (oki) -->
+        <!-- SECRET PAGE 1 - NO BLUR, COMPLETELY NORMAL -->
         <section class="fade-section" id="secret1">
             <div class="content">
                 <h3 class="section-sub">🔒 Secret page 1</h3>
                 <p class="section-title" style="font-size:1.4rem;">Hint: the word you say that scares me</p>
                 
-                <!-- Password box - ALWAYS clear -->
+                <!-- Password box - completely normal, no blur -->
                 <div class="password-box" id="passwordBox1">
                     <input type="password" class="password-input" placeholder="Enter password" id="pwd1" autocomplete="off">
                     <button class="btn" id="unlock1">Unlock →</button>
@@ -350,13 +351,13 @@
             </div>
         </section>
 
-        <!-- SECRET PAGE 2 - FIXED (kiss) -->
+        <!-- SECRET PAGE 2 - NO BLUR, COMPLETELY NORMAL -->
         <section class="fade-section" id="secret2">
             <div class="content">
                 <h3 class="section-sub">🔒 Secret page 2</h3>
                 <p class="section-title" style="font-size:1.4rem;">Hint: what we do every time we meet</p>
                 
-                <!-- Password box - ALWAYS clear -->
+                <!-- Password box - completely normal, no blur -->
                 <div class="password-box" id="passwordBox2">
                     <input type="password" class="password-input" placeholder="Enter password" id="pwd2" autocomplete="off">
                     <button class="btn" id="unlock2">Unlock →</button>
@@ -399,7 +400,7 @@
 
             sections.forEach(s => observer.observe(s));
 
-            // SECRET PAGE 1 (oki) - FIXED
+            // SECRET PAGE 1 (oki) - SIMPLE AND CLEAN
             const pwd1 = document.getElementById('pwd1');
             const unlock1 = document.getElementById('unlock1');
             const msg1 = document.getElementById('msg1');
@@ -420,7 +421,6 @@
                 }
             });
 
-            // Allow Enter key to submit
             pwd1.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -428,7 +428,7 @@
                 }
             });
 
-            // SECRET PAGE 2 (kiss) - FIXED
+            // SECRET PAGE 2 (kiss) - SIMPLE AND CLEAN
             const pwd2 = document.getElementById('pwd2');
             const unlock2 = document.getElementById('unlock2');
             const msg2 = document.getElementById('msg2');
