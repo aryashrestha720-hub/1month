@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* snap scroll container */
+        /* snap scroll container - KEPT APPEALING SWIPE EFFECT */
         .scroll-container {
             height: 100vh;
             overflow-y: scroll;
@@ -139,6 +139,8 @@
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(232, 141, 170, 0.3);
             transition: transform 0.2s ease, background 0.2s;
+            white-space: normal;
+            line-height: 1.4;
         }
 
         .btn:hover {
@@ -146,7 +148,7 @@
             background: #e27b9c;
         }
 
-        /* Secret pages - NO BLUR, completely normal */
+        /* Secret pages - NO BLUR */
         .password-box {
             display: flex;
             flex-direction: column;
@@ -183,6 +185,43 @@
             width: 100%;
         }
 
+        /* Secret page 2 special styling - FIXED */
+        .secret-scroll-box {
+            width: 100%;
+            max-height: 60vh;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            padding: 25px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(232, 141, 170, 0.15);
+            border: 1px solid rgba(232, 141, 170, 0.2);
+            scrollbar-width: thin;
+            scrollbar-color: #E88DAA #FFE4EC;
+        }
+
+        .secret-scroll-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .secret-scroll-box::-webkit-scrollbar-track {
+            background: #FFE4EC;
+            border-radius: 10px;
+        }
+
+        .secret-scroll-box::-webkit-scrollbar-thumb {
+            background: #E88DAA;
+            border-radius: 10px;
+        }
+
+        .secret-divider {
+            height: 1px;
+            background: #E88DAA;
+            width: 50px;
+            margin: 25px auto;
+            opacity: 0.5;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -217,7 +256,15 @@
         .mt-2 { margin-top: 1rem; }
         .mb-1 { margin-bottom: 0.5rem; }
         
-        /* NO BLUR CLASSES - completely removed */
+        /* Special styling for final love button */
+        .love-button {
+            background: #E88DAA;
+            font-size: 1.1rem;
+            padding: 18px 24px;
+            box-shadow: 0 8px 20px rgba(232, 141, 170, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            max-width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -331,67 +378,96 @@
             </div>
         </section>
 
-        <!-- SECRET PAGE 1 - NO BLUR, COMPLETELY NORMAL -->
+        <!-- SECRET PAGE 1 -->
         <section class="fade-section" id="secret1">
             <div class="content">
                 <h3 class="section-sub">🔒 Secret page 1</h3>
                 <p class="section-title" style="font-size:1.4rem;">Hint: the word you say that scares me</p>
                 
-                <!-- Password box - completely normal, no blur -->
+                <!-- Password box -->
                 <div class="password-box" id="passwordBox1">
                     <input type="password" class="password-input" placeholder="Enter password" id="pwd1" autocomplete="off">
                     <button class="btn" id="unlock1">Unlock →</button>
                     <div class="wrong-msg" id="msg1"></div>
                 </div>
                 
-                <!-- Secret content - hidden until unlocked -->
+                <!-- Secret content -->
                 <div id="secret-text1" style="display: none;" class="secret-content">
                     <p class="emotional">When You blush<br>I notice.<br>And every time<br>I fall a little more.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECRET PAGE 2 - FIXED: Scrollable content -->
-<section class="fade-section" id="secret2" style="overflow-y: auto;">
-    <div class="content" style="height: 100%; justify-content: flex-start; padding: 40px 0;">
-        <h3 class="section-sub" style="margin-top: 20px;">🔒 Secret page 2</h3>
-        <p class="section-title" style="font-size:1.4rem; padding: 0 20px;">Hint: what we do every time we meet</p>
-        
-        <!-- Password box - completely normal, no blur -->
-        <div class="password-box" id="passwordBox2" style="margin: 10px 20px;">
-            <input type="password" class="password-input" placeholder="Enter password" id="pwd2" autocomplete="off">
-            <button class="btn" id="unlock2">Unlock →</button>
-            <div class="wrong-msg" id="msg2"></div>
-        </div>
-        
-        <!-- Secret content - scrollable when unlocked -->
-        <div id="secret-text2" style="display: none; width: 100%; overflow-y: auto; flex: 1; padding: 0 20px 30px 20px;" class="secret-content">
-            <div style="max-width: 360px; margin: 0 auto;">
-                <p><span class="emotional">Every Time It's You</span><br>Every time I meet You<br>I remember Your kisses.<br>Not just once.<br>Every time.</p>
-                <p>The way You come close<br>like nothing else matters.<br>The way You look at Me<br>before You do it.</p>
-                <p>Soft sometimes.<br>Playful sometimes.<br>But always Yours.</p>
-                <p class="mt-2"><span class="emotional">That One Moment</span><br>The one I cannot forget?<br>When You kissed Me<br>while I was driving.</p>
-                <p>You did not wait.<br>You just leaned in.<br>Passionate. Sudden. Real.<br>I kept driving.<br>But my heart stayed with You.</p>
-                <p class="mt-2"><span class="emotional">What I Want You To Know</span><br>I love kissing You.<br>I remember every single one.<br>I always want one more.<br>So next time we meet<br>do not hold back.</p>
-                <p style="margin-top: 30px; color: #E88DAA;">💕</p>
+        <!-- SECRET PAGE 2 - COMPLETELY FIXED, NO OVERLAP -->
+        <section class="fade-section" id="secret2">
+            <div class="content" style="justify-content: center; height: 100%;">
+                <h3 class="section-sub">🔒 Secret page 2</h3>
+                <p class="section-title" style="font-size:1.4rem; margin-bottom: 10px;">Hint: what we do every time we meet</p>
+                
+                <!-- Password box -->
+                <div class="password-box" id="passwordBox2" style="margin: 10px 0;">
+                    <input type="password" class="password-input" placeholder="Enter password" id="pwd2" autocomplete="off">
+                    <button class="btn" id="unlock2">Unlock →</button>
+                    <div class="wrong-msg" id="msg2"></div>
+                </div>
+                
+                <!-- Secret content - Beautiful scrollable box -->
+                <div id="secret-text2" style="display: none; width: 100%;" class="secret-content">
+                    <div class="secret-scroll-box">
+                        <div style="text-align: center;">
+                            <p style="font-size: 1.3rem; font-family: 'Playfair Display', serif; margin-bottom: 20px; color: #E88DAA;">Every Time It's You</p>
+                            <p>Every time I meet You<br>I remember Your kisses.<br>Not just once.<br>Every time.</p>
+                            <p>The way You come close<br>like nothing else matters.<br>The way You look at Me<br>before You do it.</p>
+                            <p>Soft sometimes.<br>Playful sometimes.<br>But always Yours.</p>
+                            
+                            <div class="secret-divider"></div>
+                            
+                            <p style="font-size: 1.2rem; font-family: 'Playfair Display', serif; margin-bottom: 15px; color: #E88DAA;">That One Moment</p>
+                            <p>The one I cannot forget?<br>When You kissed Me<br>while I was driving.</p>
+                            <p>You did not wait.<br>You just leaned in.<br>Passionate. Sudden. Real.<br>I kept driving.<br>But my heart stayed with You.</p>
+                            
+                            <div class="secret-divider"></div>
+                            
+                            <p style="font-size: 1.2rem; font-family: 'Playfair Display', serif; margin-bottom: 15px; color: #E88DAA;">What I Want You To Know</p>
+                            <p>I love kissing You.<br>I remember every single one.<br>I always want one more.<br>So next time we meet<br>do not hold back.</p>
+                            
+                            <p style="margin-top: 25px; font-size: 1.5rem; color: #E88DAA;">💕</p>
+                            <p style="font-size: 0.8rem; color: #E88DAA; margin-top: 10px; opacity: 0.7;">scroll for more...</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-        <!-- FINAL PAGE -->
+        <!-- FINAL PAGE - WITH SPECIAL LOVE MESSAGE BUTTON -->
         <section class="fade-section final-bg" id="final">
             <div class="content">
                 <h2 class="section-title" style="font-size: 2rem;">🌙</h2>
                 <p class="emotional">One month with You.<br><span class="pause-line">Pause.</span><span class="pause-line">And I still like You<br>more than I planned.</span></p>
-                <a href="#" class="btn" style="margin-top: 2rem;" id="stayBtn">Stay →<br><span style="font-size:0.8rem;">I am not going anywhere.</span></a>
+                
+                <!-- Special love button - goes to next section -->
+                <a href="#love-message" class="btn love-button" style="margin-top: 2rem;" id="loveBtn">
+                    I LOVE YOU MECHI<br>SOOOOO MUCH<br>and I'LL KEEP LOVING YOU.<br>ALWAYS BE MINE 💕
+                </a>
+            </div>
+        </section>
+
+        <!-- LOVE MESSAGE SECTION - NEW FINAL DESTINATION -->
+        <section class="fade-section gradient-bg" id="love-message">
+            <div class="content">
+                <h1 style="font-size: 3rem; margin-bottom: 1rem;">💕</h1>
+                <h2 class="section-title" style="font-size: 2rem;">I LOVE YOU</h2>
+                <p class="emotional" style="font-size: 1.5rem; margin: 1rem 0;">Mechi</p>
+                <p>sooooo much<br>and ill keep loving you.<br><br><span style="font-size: 1.3rem;">always be mine</span></p>
+                <p style="margin-top: 2rem; font-size: 2rem;">💗</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">forever and always</p>
             </div>
         </section>
     </div>
 
     <script>
         (function() {
-            // Intersection observer for fade + zoom
+            // Intersection observer for fade sections
             const sections = document.querySelectorAll('.fade-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -403,7 +479,7 @@
 
             sections.forEach(s => observer.observe(s));
 
-            // SECRET PAGE 1 (oki) - SIMPLE AND CLEAN
+            // SECRET PAGE 1 (oki)
             const pwd1 = document.getElementById('pwd1');
             const unlock1 = document.getElementById('unlock1');
             const msg1 = document.getElementById('msg1');
@@ -413,7 +489,6 @@
             unlock1.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (pwd1.value.toLowerCase().trim() === 'oki') {
-                    // Hide password box, show secret content
                     passwordBox1.style.display = 'none';
                     text1.style.display = 'block';
                     msg1.innerText = '';
@@ -431,7 +506,7 @@
                 }
             });
 
-            // SECRET PAGE 2 (kiss) - SIMPLE AND CLEAN
+            // SECRET PAGE 2 (kiss)
             const pwd2 = document.getElementById('pwd2');
             const unlock2 = document.getElementById('unlock2');
             const msg2 = document.getElementById('msg2');
@@ -441,7 +516,6 @@
             unlock2.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (pwd2.value.toLowerCase().trim() === 'kiss') {
-                    // Hide password box, show secret content
                     passwordBox2.style.display = 'none';
                     text2.style.display = 'block';
                     msg2.innerText = '';
@@ -459,10 +533,10 @@
                 }
             });
 
-            // Stay button
-            document.getElementById('stayBtn').addEventListener('click', function(e) {
+            // Love button - smooth scroll to love message section
+            document.getElementById('loveBtn').addEventListener('click', function(e) {
                 e.preventDefault();
-                alert('I\'m not going anywhere 🤍');
+                document.getElementById('love-message').scrollIntoView({ behavior: 'smooth' });
             });
 
             // Start button smooth scroll
