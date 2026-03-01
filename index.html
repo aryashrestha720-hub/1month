@@ -17,13 +17,13 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #FFF1F5;      /* base warm pink */
-            color: #2B2B2B;                  /* deep charcoal */
+            background-color: #FFF1F5;
+            color: #2B2B2B;
             line-height: 1.5;
             overflow-x: hidden;
         }
 
-        /* snap scroll container – each section = full screen */
+        /* snap scroll container */
         .scroll-container {
             height: 100vh;
             overflow-y: scroll;
@@ -43,23 +43,20 @@
             align-items: center;
             padding: 40px 20px;
             position: relative;
-            background-color: #FFF1F5;          /* base, can be overridden */
+            background-color: #FFF1F5;
             transition: background-color 0.2s;
         }
 
-        /* soft gradient for some sections (optional) */
         .gradient-bg {
             background: linear-gradient(145deg, #FFF1F5, #FFE4EC);
         }
 
-        /* final page slightly deeper */
         .final-bg {
-            background: #FADADD;  /* soft dusty pink */
+            background: #FADADD;
         }
 
-        /* inner content box – keeps text from edges, centered */
         .content {
-            max-width: 360px;       /* comfy on android */
+            max-width: 360px;
             width: 100%;
             text-align: center;
             display: flex;
@@ -68,7 +65,6 @@
             gap: 1.2rem;
         }
 
-        /* headings */
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
@@ -91,12 +87,11 @@
             margin-bottom: 1rem;
         }
 
-        /* body text */
         p {
             font-weight: 300;
             font-size: 1.1rem;
             margin: 0.4rem 0;
-            white-space: pre-line;   /* respect line breaks */
+            white-space: pre-line;
         }
 
         .emotional {
@@ -105,7 +100,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* small captions / meta */
         .caption {
             font-size: 0.9rem;
             opacity: 0.65;
@@ -113,37 +107,24 @@
             margin-top: 0.5rem;
         }
 
-        /* photo placeholder style */
+        /* Photo styling - FIXED */
         .photo-frame {
             width: 260px;
             height: 260px;
-            background: #FFDAE0;  /* soft rose tint */
             border-radius: 20px;
             box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2B2B2B;
-            font-size: 0.95rem;
-            font-weight: 300;
             margin: 1.5rem 0 0.5rem;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%23e88daa" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L7 21"/></svg>');
-            background-repeat: no-repeat;
-            background-position: center 35%;
-            background-size: 48px 48px;
-            text-align: center;
-            padding-top: 150px;   /* push text below icon */
+            overflow: hidden;
+            background: #FFDAE0;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .photo-frame span {
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(2px);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-        }
-
-        /* button style */
         .btn {
             display: inline-block;
             padding: 14px 28px;
@@ -158,9 +139,6 @@
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(232, 141, 170, 0.3);
             transition: transform 0.2s ease, background 0.2s;
-            border: none;
-            outline: inherit;
-            margin: 1rem 0 0.5rem;
         }
 
         .btn:hover {
@@ -168,19 +146,7 @@
             background: #e27b9c;
         }
 
-        /* secret pages (blur hidden) */
-        .secret-hidden {
-            filter: blur(6px) brightness(0.98);
-            pointer-events: none;
-            user-select: none;
-            transition: filter 0.4s ease;
-        }
-
-        .secret-revealed {
-            filter: blur(0) brightness(1);
-            pointer-events: auto;
-        }
-
+        /* Secret pages - FIXED */
         .password-box {
             display: flex;
             flex-direction: column;
@@ -188,6 +154,11 @@
             gap: 12px;
             margin: 20px 0 10px;
             width: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 25px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(232, 141, 170, 0.3);
         }
 
         .password-input {
@@ -207,7 +178,18 @@
             min-height: 24px;
         }
 
-        /* animation on scroll (intersection observer) */
+        .secret-content {
+            animation: fadeIn 0.6s ease;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* animation on scroll */
         .fade-section {
             opacity: 0;
             transform: translateY(40px);
@@ -219,17 +201,6 @@
             transform: translateY(0);
         }
 
-        /* photo zoom effect on appear */
-        .zoom-photo {
-            transform: scale(0.95);
-            transition: transform 0.5s ease;
-        }
-
-        .zoom-photo.visible {
-            transform: scale(1);
-        }
-
-        /* pause effect lines: first line shows, second line delayed */
         .pause-line {
             display: block;
         }
@@ -237,21 +208,15 @@
             animation: fadeIn 0.8s 0.3s forwards;
             opacity: 0;
         }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
 
-        /* spacing */
-        .mt-2 { margin-top: 1rem; }
-        .mb-1 { margin-bottom: 0.5rem; }
-        .soft-words { font-style: italic; }
-
-        /* small tagline for 'oki' */
         .cute-tag {
             font-size: 0.9rem;
             color: #E88DAA;
             font-weight: 400;
         }
+
+        .mt-2 { margin-top: 1rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -285,12 +250,14 @@
             </div>
         </section>
 
-        <!-- FIRST PHOTO -->
+        <!-- FIRST PHOTO - FIXED with img tag -->
         <section class="fade-section">
             <div class="content">
                 <h3 class="section-sub">📸 Photo space</h3>
                 <h2 class="section-title" style="font-size: 1.8rem;">Our First Photo</h2>
-                <img src="1.jpeg" alt="Our first photo" style="width: 260px; height: 260px; border-radius: 20px; object-fit: cover; box-shadow: 0px 10px 30px rgba(0,0,0,0.08);">
+                <div class="photo-frame">
+                    <img src="1.jpeg" alt="Our first photo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'260\' height=\'260\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23e88daa\' stroke-width=\'1.2\'><rect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2.18\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L7 21\'/></svg>'; this.style.objectFit='none';">
+                </div>
                 <p class="caption">The moment You became real to Me.</p>
             </div>
         </section>
@@ -313,12 +280,14 @@
             </div>
         </section>
 
-        <!-- MEMORY PHOTO - A moment I want again -->
+        <!-- MEMORY PHOTO - FIXED with img tag -->
         <section class="fade-section">
             <div class="content">
                 <h3 class="section-sub">📸 Photo space</h3>
                 <h2 class="section-title" style="font-size: 1.9rem;">A Moment I Want Again</h2>
-                <img src="2.jpeg" alt="Memory moment" style="width: 260px; height: 260px; border-radius: 20px; object-fit: cover; box-shadow: 0px 10px 30px rgba(0,0,0,0.08);">
+                <div class="photo-frame">
+                    <img src="2.jpeg" alt="Memory moment" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'260\' height=\'260\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23e88daa\' stroke-width=\'1.2\'><rect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2.18\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L7 21\'/></svg>'; this.style.objectFit='none';">
+                </div>
                 <p class="caption">If I could repeat something<br>it would be this.</p>
             </div>
         </section>
@@ -332,12 +301,14 @@
             </div>
         </section>
 
-        <!-- US PHOTO -->
+        <!-- US PHOTO - FIXED with img tag -->
         <section class="fade-section">
             <div class="content">
                 <h3 class="section-sub">📸 Photo space</h3>
                 <h2 class="section-title">Us</h2>
-                <img src="3.jpeg" alt="Us together" style="width: 260px; height: 260px; border-radius: 20px; object-fit: cover; box-shadow: 0px 10px 30px rgba(0,0,0,0.08);">
+                <div class="photo-frame">
+                    <img src="3.jpeg" alt="Us together" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'260\' height=\'260\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23e88daa\' stroke-width=\'1.2\'><rect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2.18\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L7 21\'/></svg>'; this.style.objectFit='none';">
+                </div>
                 <p class="caption">Still new. Still learning. Still ours.</p>
             </div>
         </section>
@@ -359,33 +330,41 @@
             </div>
         </section>
 
-        <!-- SECRET PAGE 1 (hint: oki) -->
-        <section class="fade-section secret-hidden" id="secret1" data-password="oki">
+        <!-- SECRET PAGE 1 - FIXED (oki) -->
+        <section class="fade-section" id="secret1">
             <div class="content">
                 <h3 class="section-sub">🔒 Secret page 1</h3>
                 <p class="section-title" style="font-size:1.4rem;">Hint: the word you say that scares me</p>
-                <div class="password-box">
-                    <input type="password" class="password-input" placeholder="password" id="pwd1">
-                    <button class="btn" id="unlock1">unlock</button>
+                
+                <!-- Password box - ALWAYS clear -->
+                <div class="password-box" id="passwordBox1">
+                    <input type="password" class="password-input" placeholder="Enter password" id="pwd1" autocomplete="off">
+                    <button class="btn" id="unlock1">Unlock →</button>
                     <div class="wrong-msg" id="msg1"></div>
                 </div>
-                <div id="secret-text1" style="display: none;">
+                
+                <!-- Secret content - hidden until unlocked -->
+                <div id="secret-text1" style="display: none;" class="secret-content">
                     <p class="emotional">When You blush<br>I notice.<br>And every time<br>I fall a little more.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECRET PAGE 2 (hint: kiss) with extra intimate lines -->
-        <section class="fade-section secret-hidden" id="secret2" data-password="kiss">
+        <!-- SECRET PAGE 2 - FIXED (kiss) -->
+        <section class="fade-section" id="secret2">
             <div class="content">
                 <h3 class="section-sub">🔒 Secret page 2</h3>
                 <p class="section-title" style="font-size:1.4rem;">Hint: what we do every time we meet</p>
-                <div class="password-box">
-                    <input type="password" class="password-input" placeholder="password" id="pwd2">
-                    <button class="btn" id="unlock2">unlock</button>
+                
+                <!-- Password box - ALWAYS clear -->
+                <div class="password-box" id="passwordBox2">
+                    <input type="password" class="password-input" placeholder="Enter password" id="pwd2" autocomplete="off">
+                    <button class="btn" id="unlock2">Unlock →</button>
                     <div class="wrong-msg" id="msg2"></div>
                 </div>
-                <div id="secret-text2" style="display: none;">
+                
+                <!-- Secret content - hidden until unlocked -->
+                <div id="secret-text2" style="display: none;" class="secret-content">
                     <p><span class="emotional">Every Time It’s You</span><br>Every time I meet You<br>I remember Your kisses.<br>Not just once.<br>Every time.</p>
                     <p>The way You come close<br>like nothing else matters.<br>The way You look at Me<br>before You do it.</p>
                     <p>Soft sometimes.<br>Playful sometimes.<br>But always Yours.</p>
@@ -408,90 +387,87 @@
 
     <script>
         (function() {
-            // intersection observer for fade + zoom
+            // Intersection observer for fade + zoom
             const sections = document.querySelectorAll('.fade-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // also trigger photo zoom inside
-                        const photo = entry.target.querySelector('.zoom-photo');
-                        if(photo) photo.classList.add('visible');
                     }
                 });
             }, { threshold: 0.3 });
 
             sections.forEach(s => observer.observe(s));
 
-            // secret page 1 (oki)
-            const secret1 = document.getElementById('secret1');
+            // SECRET PAGE 1 (oki) - FIXED
             const pwd1 = document.getElementById('pwd1');
             const unlock1 = document.getElementById('unlock1');
             const msg1 = document.getElementById('msg1');
             const text1 = document.getElementById('secret-text1');
+            const passwordBox1 = document.getElementById('passwordBox1');
 
             unlock1.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (pwd1.value.toLowerCase().trim() === 'oki') {
-                    secret1.classList.remove('secret-hidden');
-                    secret1.classList.add('secret-revealed');
+                    // Hide password box, show secret content
+                    passwordBox1.style.display = 'none';
                     text1.style.display = 'block';
                     msg1.innerText = '';
-                    pwd1.disabled = true;
-                    unlock1.disabled = true;
                 } else {
                     msg1.innerText = 'try again, lovely';
+                    pwd1.value = '';
+                    pwd1.focus();
                 }
             });
 
-            // secret page 2 (kiss)
-            const secret2 = document.getElementById('secret2');
+            // Allow Enter key to submit
+            pwd1.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    unlock1.click();
+                }
+            });
+
+            // SECRET PAGE 2 (kiss) - FIXED
             const pwd2 = document.getElementById('pwd2');
             const unlock2 = document.getElementById('unlock2');
             const msg2 = document.getElementById('msg2');
             const text2 = document.getElementById('secret-text2');
+            const passwordBox2 = document.getElementById('passwordBox2');
 
             unlock2.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (pwd2.value.toLowerCase().trim() === 'kiss') {
-                    secret2.classList.remove('secret-hidden');
-                    secret2.classList.add('secret-revealed');
+                    // Hide password box, show secret content
+                    passwordBox2.style.display = 'none';
                     text2.style.display = 'block';
                     msg2.innerText = '';
-                    pwd2.disabled = true;
-                    unlock2.disabled = true;
                 } else {
                     msg2.innerText = 'try again, love';
+                    pwd2.value = '';
+                    pwd2.focus();
                 }
             });
 
-            // stay button gentle alert
-            document.getElementById('stayBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('I’m not going anywhere 🤍');
+            pwd2.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    unlock2.click();
+                }
             });
 
-            // optional start button smooth scroll
+            // Stay button
+            document.getElementById('stayBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('I\'m not going anywhere 🤍');
+            });
+
+            // Start button smooth scroll
             document.querySelector('a[href="#start"]').addEventListener('click', function(e) {
                 e.preventDefault();
                 document.getElementById('start').scrollIntoView({ behavior: 'smooth' });
             });
         })();
     </script>
-
-    <!-- ensure all sections start hidden for observer, but visible if no intersection? they start hidden with css, observer reveals -->
-    <style>
-        .fade-section { opacity: 0; transform: translateY(40px); }
-        .fade-section.visible { opacity: 1; transform: translateY(0); }
-        .zoom-photo { transform: scale(0.95); }
-        .zoom-photo.visible { transform: scale(1); }
-        .secret-hidden { filter: blur(6px); pointer-events: none; }
-        .secret-revealed { filter: blur(0); pointer-events: auto; }
-        /* make sure secret pages also have visible class to animate */
-        .secret-hidden.visible { opacity: 1; transform: translateY(0); } 
-        /* but keep blur if hidden */
-        .secret-hidden.visible { filter: blur(6px); }
-        .secret-revealed.visible { filter: blur(0); }
-    </style>
 </body>
 </html>
