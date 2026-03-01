@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>one month with you · mechi</title>
+    <!-- Fonts: Playfair Display (headings) & Poppins (text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF1F5;      /* base warm pink */
+            color: #2B2B2B;                  /* deep charcoal */
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* snap scroll container – each section = full screen */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            background-color: #FFF1F5;          /* base, can be overridden */
+            transition: background-color 0.2s;
+        }
+
+        /* soft gradient for some sections (optional) */
+        .gradient-bg {
+            background: linear-gradient(145deg, #FFF1F5, #FFE4EC);
+        }
+
+        /* final page slightly deeper */
+        .final-bg {
+            background: #FADADD;  /* soft dusty pink */
+        }
+
+        /* inner content box – keeps text from edges, centered */
+        .content {
+            max-width: 360px;       /* comfy on android */
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        /* headings */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: #2B2B2B;
+            line-height: 1.2;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        /* body text */
+        p {
+            font-weight: 300;
+            font-size: 1.1rem;
+            margin: 0.4rem 0;
+            white-space: pre-line;   /* respect line breaks */
+        }
+
+        .emotional {
+            font-weight: 400;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* small captions / meta */
+        .caption {
+            font-size: 0.9rem;
+            opacity: 0.65;
+            font-weight: 300;
+            margin-top: 0.5rem;
+        }
+
+        /* photo placeholder style */
+        .photo-frame {
+            width: 260px;
+            height: 260px;
+            background: #FFDAE0;  /* soft rose tint */
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2B2B2B;
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin: 1.5rem 0 0.5rem;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%23e88daa" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L7 21"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center 35%;
+            background-size: 48px 48px;
+            text-align: center;
+            padding-top: 150px;   /* push text below icon */
+        }
+
+        .photo-frame span {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(2px);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* button style */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 30px;
+            background: #E88DAA;
+            color: white;
+            font-weight: 500;
+            border: none;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(232, 141, 170, 0.3);
+            transition: transform 0.2s ease, background 0.2s;
+            border: none;
+            outline: inherit;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #e27b9c;
+        }
+
+        /* secret pages (blur hidden) */
+        .secret-hidden {
+            filter: blur(6px) brightness(0.98);
+            pointer-events: none;
+            user-select: none;
+            transition: filter 0.4s ease;
+        }
+
+        .secret-revealed {
+            filter: blur(0) brightness(1);
+            pointer-events: auto;
+        }
+
+        .password-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 10px;
+            width: 100%;
+        }
+
+        .password-input {
+            padding: 12px 20px;
+            border-radius: 40px;
+            border: 1px solid #E88DAA;
+            background: white;
+            font-size: 1rem;
+            width: 200px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrong-msg {
+            color: #b13e5c;
+            font-size: 0.85rem;
+            min-height: 24px;
+        }
+
+        /* animation on scroll (intersection observer) */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* photo zoom effect on appear */
+        .zoom-photo {
+            transform: scale(0.95);
+            transition: transform 0.5s ease;
+        }
+
+        .zoom-photo.visible {
+            transform: scale(1);
+        }
+
+        /* pause effect lines: first line shows, second line delayed */
+        .pause-line {
+            display: block;
+        }
+        .pause-line + .pause-line {
+            animation: fadeIn 0.8s 0.3s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* spacing */
+        .mt-2 { margin-top: 1rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .soft-words { font-style: italic; }
+
+        /* small tagline for 'oki' */
+        .cute-tag {
+            font-size: 0.9rem;
+            color: #E88DAA;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-container" id="scrollContainer">
+        <!-- TITLE PAGE -->
+        <section class="fade-section gradient-bg" id="title">
+            <div class="content">
+                <h1 style="font-size: 2.3rem; margin-bottom: 0.2rem;">🌸</h1>
+                <h2 class="section-title" style="font-size: 2.2rem;">One Month<br>With You, Mechi</h2>
+                <p style="font-weight: 300;">You started as a chat.<br>You became my habit.</p>
+                <a href="#start" class="btn" style="margin-top: 2rem;">Start →</a>
+            </div>
+        </section>
+
+        <!-- HOW YOU STARTED -->
+        <section class="fade-section" id="start">
+            <div class="content">
+                <h3 class="section-sub">🟣 How You Started</h3>
+                <h2 class="section-title" style="font-size: 1.9rem;">How You Came Into My Life</h2>
+                <p>You did not arrive with noise.<br>Just a message.<br>Just a conversation.<br>And suddenly<br>I started waiting for you.</p>
+            </div>
+        </section>
+
+        <!-- SMALL THING (OKI) -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">💗 A Small Thing</h3>
+                <h2 class="section-title">Something You Do</h2>
+                <p>You say “oki”<br>Like it is harmless.<br>But every time you do<br>you scare me a little.</p>
+                <span class="cute-tag">Still cute though.</span>
+            </div>
+        </section>
+
+        <!-- FIRST PHOTO -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">📸 Photo space</h3>
+                <h2 class="section-title" style="font-size: 1.8rem;">Our First Photo</h2>
+                <div class="photo-frame zoom-photo"><span>❤️ us</span></div>
+                <p class="caption">The moment You became real to Me.</p>
+            </div>
+        </section>
+
+        <!-- FIRST KISS -->
+        <section class="fade-section gradient-bg">
+            <div class="content">
+                <h3 class="section-sub">✨ A Moment I Cannot Forget</h3>
+                <h2 class="section-title">When You Kissed Me First</h2>
+                <p>I thought it would be simple.<br>But You made it magical.<br>Like time paused<br>just for us.</p>
+            </div>
+        </section>
+
+        <!-- BLUSH SECTION -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">🫣 Something I Love</h3>
+                <h2 class="section-title">When You Blush</h2>
+                <p>I like making You blush.<br>Because in that moment<br>You stop acting strong.<br>And You become soft<br>only for Me.</p>
+            </div>
+        </section>
+
+        <!-- MEMORY PHOTO - A moment I want again -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">📸 Photo space</h3>
+                <h2 class="section-title" style="font-size: 1.9rem;">A Moment I Want Again</h2>
+                <div class="photo-frame zoom-photo"><span>✨ replay</span></div>
+                <p class="caption">If I could repeat something<br>it would be this.</p>
+            </div>
+        </section>
+
+        <!-- WHAT THIS MONTH DID -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">🌿</h3>
+                <h2 class="section-title">What This Month Did</h2>
+                <p>You became familiar.<br>You became important.<br>You became someone<br>I want to tell everything to.</p>
+            </div>
+        </section>
+
+        <!-- US PHOTO -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">📸 Photo space</h3>
+                <h2 class="section-title">Us</h2>
+                <div class="photo-frame zoom-photo"><span>📖 still new</span></div>
+                <p class="caption">Still new. Still learning. Still ours.</p>
+            </div>
+        </section>
+
+        <!-- WHAT YOU ARE NOW -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">🧩</h3>
+                <h2 class="section-title">What You Are Now</h2>
+                <p>You are someone I wait for.<br>Someone I think about<br>even when I am busy.<br>Someone I miss<br>even after talking.</p>
+            </div>
+        </section>
+
+        <!-- NEXT MONTH -->
+        <section class="fade-section">
+            <div class="content">
+                <h3 class="section-sub">🌅 The Next Month</h3>
+                <p>More talks with You.<br>More moments with You.<br>More reasons to make You blush.<br>And hopefully<br>fewer “oki” scares.</p>
+            </div>
+        </section>
+
+        <!-- SECRET PAGE 1 (hint: oki) -->
+        <section class="fade-section secret-hidden" id="secret1" data-password="oki">
+            <div class="content">
+                <h3 class="section-sub">🔒 Secret page 1</h3>
+                <p class="section-title" style="font-size:1.4rem;">Hint: the word you say that scares me</p>
+                <div class="password-box">
+                    <input type="password" class="password-input" placeholder="password" id="pwd1">
+                    <button class="btn" id="unlock1">unlock</button>
+                    <div class="wrong-msg" id="msg1"></div>
+                </div>
+                <div id="secret-text1" style="display: none;">
+                    <p class="emotional">When You blush<br>I notice.<br>And every time<br>I fall a little more.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECRET PAGE 2 (hint: kiss) with extra intimate lines -->
+        <section class="fade-section secret-hidden" id="secret2" data-password="kiss">
+            <div class="content">
+                <h3 class="section-sub">🔒 Secret page 2</h3>
+                <p class="section-title" style="font-size:1.4rem;">Hint: what we do every time we meet</p>
+                <div class="password-box">
+                    <input type="password" class="password-input" placeholder="password" id="pwd2">
+                    <button class="btn" id="unlock2">unlock</button>
+                    <div class="wrong-msg" id="msg2"></div>
+                </div>
+                <div id="secret-text2" style="display: none;">
+                    <p><span class="emotional">Every Time It’s You</span><br>Every time I meet You<br>I remember Your kisses.<br>Not just once.<br>Every time.</p>
+                    <p>The way You come close<br>like nothing else matters.<br>The way You look at Me<br>before You do it.</p>
+                    <p>Soft sometimes.<br>Playful sometimes.<br>But always Yours.</p>
+                    <p class="mt-2"><span class="emotional">That One Moment</span><br>The one I cannot forget?<br>When You kissed Me<br>while I was driving.</p>
+                    <p>You did not wait.<br>You just leaned in.<br>Passionate. Sudden. Real.<br>I kept driving.<br>But my heart stayed with You.</p>
+                    <p class="mt-2"><span class="emotional">What I Want You To Know</span><br>I love kissing You.<br>I remember every single one.<br>I always want one more.<br>So next time we meet<br>do not hold back.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL PAGE -->
+        <section class="fade-section final-bg" id="final">
+            <div class="content">
+                <h2 class="section-title" style="font-size: 2rem;">🌙</h2>
+                <p class="emotional">One month with You.<br><span class="pause-line">Pause.</span><span class="pause-line">And I still like You<br>more than I planned.</span></p>
+                <a href="#" class="btn" style="margin-top: 2rem;" id="stayBtn">Stay →<br><span style="font-size:0.8rem;">I am not going anywhere.</span></a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        (function() {
+            // intersection observer for fade + zoom
+            const sections = document.querySelectorAll('.fade-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // also trigger photo zoom inside
+                        const photo = entry.target.querySelector('.zoom-photo');
+                        if(photo) photo.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(s => observer.observe(s));
+
+            // secret page 1 (oki)
+            const secret1 = document.getElementById('secret1');
+            const pwd1 = document.getElementById('pwd1');
+            const unlock1 = document.getElementById('unlock1');
+            const msg1 = document.getElementById('msg1');
+            const text1 = document.getElementById('secret-text1');
+
+            unlock1.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (pwd1.value.toLowerCase().trim() === 'oki') {
+                    secret1.classList.remove('secret-hidden');
+                    secret1.classList.add('secret-revealed');
+                    text1.style.display = 'block';
+                    msg1.innerText = '';
+                    pwd1.disabled = true;
+                    unlock1.disabled = true;
+                } else {
+                    msg1.innerText = 'try again, lovely';
+                }
+            });
+
+            // secret page 2 (kiss)
+            const secret2 = document.getElementById('secret2');
+            const pwd2 = document.getElementById('pwd2');
+            const unlock2 = document.getElementById('unlock2');
+            const msg2 = document.getElementById('msg2');
+            const text2 = document.getElementById('secret-text2');
+
+            unlock2.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (pwd2.value.toLowerCase().trim() === 'kiss') {
+                    secret2.classList.remove('secret-hidden');
+                    secret2.classList.add('secret-revealed');
+                    text2.style.display = 'block';
+                    msg2.innerText = '';
+                    pwd2.disabled = true;
+                    unlock2.disabled = true;
+                } else {
+                    msg2.innerText = 'try again, love';
+                }
+            });
+
+            // stay button gentle alert
+            document.getElementById('stayBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('I’m not going anywhere 🤍');
+            });
+
+            // optional start button smooth scroll
+            document.querySelector('a[href="#start"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('start').scrollIntoView({ behavior: 'smooth' });
+            });
+        })();
+    </script>
+
+    <!-- ensure all sections start hidden for observer, but visible if no intersection? they start hidden with css, observer reveals -->
+    <style>
+        .fade-section { opacity: 0; transform: translateY(40px); }
+        .fade-section.visible { opacity: 1; transform: translateY(0); }
+        .zoom-photo { transform: scale(0.95); }
+        .zoom-photo.visible { transform: scale(1); }
+        .secret-hidden { filter: blur(6px); pointer-events: none; }
+        .secret-revealed { filter: blur(0); pointer-events: auto; }
+        /* make sure secret pages also have visible class to animate */
+        .secret-hidden.visible { opacity: 1; transform: translateY(0); } 
+        /* but keep blur if hidden */
+        .secret-hidden.visible { filter: blur(6px); }
+        .secret-revealed.visible { filter: blur(0); }
+    </style>
+</body>
+</html>
