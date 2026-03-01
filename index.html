@@ -351,30 +351,33 @@
             </div>
         </section>
 
-        <!-- SECRET PAGE 2 - NO BLUR, COMPLETELY NORMAL -->
-        <section class="fade-section" id="secret2">
-            <div class="content">
-                <h3 class="section-sub">🔒 Secret page 2</h3>
-                <p class="section-title" style="font-size:1.4rem;">Hint: what we do every time we meet</p>
-                
-                <!-- Password box - completely normal, no blur -->
-                <div class="password-box" id="passwordBox2">
-                    <input type="password" class="password-input" placeholder="Enter password" id="pwd2" autocomplete="off">
-                    <button class="btn" id="unlock2">Unlock →</button>
-                    <div class="wrong-msg" id="msg2"></div>
-                </div>
-                
-                <!-- Secret content - hidden until unlocked -->
-                <div id="secret-text2" style="display: none;" class="secret-content">
-                    <p><span class="emotional">Every Time It’s You</span><br>Every time I meet You<br>I remember Your kisses.<br>Not just once.<br>Every time.</p>
-                    <p>The way You come close<br>like nothing else matters.<br>The way You look at Me<br>before You do it.</p>
-                    <p>Soft sometimes.<br>Playful sometimes.<br>But always Yours.</p>
-                    <p class="mt-2"><span class="emotional">That One Moment</span><br>The one I cannot forget?<br>When You kissed Me<br>while I was driving.</p>
-                    <p>You did not wait.<br>You just leaned in.<br>Passionate. Sudden. Real.<br>I kept driving.<br>But my heart stayed with You.</p>
-                    <p class="mt-2"><span class="emotional">What I Want You To Know</span><br>I love kissing You.<br>I remember every single one.<br>I always want one more.<br>So next time we meet<br>do not hold back.</p>
-                </div>
+        <!-- SECRET PAGE 2 - FIXED: Scrollable content -->
+<section class="fade-section" id="secret2" style="overflow-y: auto;">
+    <div class="content" style="height: 100%; justify-content: flex-start; padding: 40px 0;">
+        <h3 class="section-sub" style="margin-top: 20px;">🔒 Secret page 2</h3>
+        <p class="section-title" style="font-size:1.4rem; padding: 0 20px;">Hint: what we do every time we meet</p>
+        
+        <!-- Password box - completely normal, no blur -->
+        <div class="password-box" id="passwordBox2" style="margin: 10px 20px;">
+            <input type="password" class="password-input" placeholder="Enter password" id="pwd2" autocomplete="off">
+            <button class="btn" id="unlock2">Unlock →</button>
+            <div class="wrong-msg" id="msg2"></div>
+        </div>
+        
+        <!-- Secret content - scrollable when unlocked -->
+        <div id="secret-text2" style="display: none; width: 100%; overflow-y: auto; flex: 1; padding: 0 20px 30px 20px;" class="secret-content">
+            <div style="max-width: 360px; margin: 0 auto;">
+                <p><span class="emotional">Every Time It's You</span><br>Every time I meet You<br>I remember Your kisses.<br>Not just once.<br>Every time.</p>
+                <p>The way You come close<br>like nothing else matters.<br>The way You look at Me<br>before You do it.</p>
+                <p>Soft sometimes.<br>Playful sometimes.<br>But always Yours.</p>
+                <p class="mt-2"><span class="emotional">That One Moment</span><br>The one I cannot forget?<br>When You kissed Me<br>while I was driving.</p>
+                <p>You did not wait.<br>You just leaned in.<br>Passionate. Sudden. Real.<br>I kept driving.<br>But my heart stayed with You.</p>
+                <p class="mt-2"><span class="emotional">What I Want You To Know</span><br>I love kissing You.<br>I remember every single one.<br>I always want one more.<br>So next time we meet<br>do not hold back.</p>
+                <p style="margin-top: 30px; color: #E88DAA;">💕</p>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <!-- FINAL PAGE -->
         <section class="fade-section final-bg" id="final">
